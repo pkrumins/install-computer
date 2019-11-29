@@ -289,6 +289,12 @@ main () {
     local -r configs sudo_configs
 
     link_configs "${!configs[@]}" "${configs[@]}"
+
+    if [[ $COMPUTER_TYPE == "laptop" ]]; then
+        # Enable high DPI on a laptop
+        sed -i 's/^!Xft.dpi:/Xft.dpi:/' ~/.Xresources
+    fi
+
     link_configs --sudo "${!sudo_configs[@]}" "${sudo_configs[@]}"
 
     if [[ $COMPUTER_TYPE == "desktop" ]]; then
