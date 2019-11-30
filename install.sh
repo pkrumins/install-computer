@@ -108,7 +108,7 @@ add_user_to_groups () {
 
     local -r user="$1" && shift
     local -r groups=("$@")
-    local -r csv_groups="$(join_strings "${groups[@]}")"
+    local -r csv_groups="$(join_strings "," "${groups[@]}")"
 
     sudo usermod -a -G "$csv_groups" "$user" || {
         echo "Error: Couldn't add the user $user to groups $csv_groups, usermod exited with error code $?."
