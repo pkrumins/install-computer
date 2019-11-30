@@ -29,7 +29,7 @@ join_strings () {
     local -r strings=("$@")
     local -r IFS="$separator"
 
-    echo "$*"
+    echo "${strings[*]}"
 }
 
 link_configs () {
