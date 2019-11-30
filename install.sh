@@ -151,6 +151,17 @@ install_pip_packages () {
     }
 }
 
+uninstall_apt_packages () {
+    if (( $# < 1 )); then
+        echo "Usage: ${FUNCNAME[0]} <package1> [package2 ...]"
+        exit 1
+    fi
+
+    local -r packages=("$@")
+
+    sudo apt-get --purge autoremove -y "${packages[@]}" || true
+}
+
 install_apt_packages () {
     if (( $# < 1 )); then
         echo "Usage: ${FUNCNAME[0]} <package1> [package2 ...]"
@@ -185,6 +196,14 @@ main () {
         echo "Error: apt-get update failed with error code $?."
         exit 1
     }
+
+    # Uninstall unneed packages
+    #
+    local -r unneeded_packages=(
+        nano
+    )
+
+    uninstall_apt_packages "${unneeded_packages[@]}"
 
     # Install apt and pip packages
     #
