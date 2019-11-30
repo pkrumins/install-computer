@@ -34,7 +34,7 @@ join_strings () {
 
 link_configs () {
     if (( $# < 2 )); then
-        echo "Usage: ${FUNCNAME[0]} [--sudo] <src1> <dst1> [src2 dst2 ...]"
+        echo "Usage: ${FUNCNAME[0]} [--sudo] <src1> [src2 ...] <dst1> [dst2 ...]"
         exit 1
     fi
 
@@ -44,7 +44,12 @@ link_configs () {
     fi
 
     if (( $# < 2 )); then
-        echo "Usage: ${FUNCNAME[0]} [--sudo] <src1> <dst1> [src2 dst2 ...]"
+        echo "Usage: ${FUNCNAME[0]} [--sudo] <src1> [src2 ...] <dst1> [dst2 ...]"
+        exit 1
+    fi
+
+    if (( $# % 2 == 1 )); then
+        echo "Error: Couldn't link configuration files, source and destination files are uneven."
         exit 1
     fi
 
