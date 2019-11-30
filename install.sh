@@ -186,6 +186,8 @@ main () {
         exit 1
     }
 
+    # Install apt and pip packages
+    #
     local -r x_packages=(
         xinit
         rxvt-unicode
@@ -249,6 +251,7 @@ main () {
     fi
 
     # Add the current user to extra groups
+    #
     local -r extra_groups=(
         audio
         docker
@@ -257,6 +260,7 @@ main () {
     add_user_to_groups "$USER" "${extra_groups[@]}"
 
     # Build docker images from ~/projects/dockerfiles subdirectories
+    #
     local -r docker_files=($(
         find ~/projects/dockerfiles \
             -maxdepth 1 \
@@ -268,6 +272,8 @@ main () {
 
     build_docker_images "${docker_files[@]}"
 
+    # Link configurations from ~/projects/dotfiles
+    #
     local -A configs=(
         [".bashrc"]=~/.bashrc
         [".inputrc"]=~/.inputrc
@@ -289,29 +295,27 @@ main () {
     local -r configs sudo_configs
 
     link_configs "${!configs[@]}" "${configs[@]}"
+    link_configs --sudo "${!sudo_configs[@]}" "${sudo_configs[@]}"
 
+    # .Xresources customization on a laptop
+    #
     if [[ $COMPUTER_TYPE == "laptop" ]]; then
         # Enable high DPI on a laptop
         sed -i 's/^!Xft.dpi:/Xft.dpi:/' ~/.Xresources
     fi
 
-    link_configs --sudo "${!sudo_configs[@]}" "${sudo_configs[@]}"
-
-    if [[ $COMPUTER_TYPE == "desktop" ]]; then
-        touch ~/.computer-desktop || {
-            echo "Error: Unable to create ~/.computer-desktop, touch failed with error code $?."
-            exit 1
-        };
-    elif [[ $COMPUTER_TYPE == "laptop" ]]; then
-        touch ~/.computer-laptop || {
-            echo "Error: Unable to create ~/.computer-desktop, touch failed with error code $?."
-            exit 1
-        };
-    fi
+    # Create ~/.computer-$COMPUTER_TYPE file
+    #
+    touch ~/.computer-$COMPUTER_TYPE || {
+        echo "Error: Unable to create ~/.computer-$COMPUTER_TYPE file, touch failed with error code $?."
+        exit 1
+    }
 
     # TODO: setup rc.local and iptables rules
     # TODO: autorun powertop on a laptop
 
+    # Set timezone to UTC
+    #
     sudo timedatectl set-timezone UTC || {
         echo "Error: Setting timezone to UTC failed with error code $?."
         exit 1;
