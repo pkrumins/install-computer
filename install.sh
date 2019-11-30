@@ -65,7 +65,7 @@ link_configs () {
 
         if [[ ! -d "$dst_dir" ]]; then
             $sudo_cmd mkdir -p "$dst_dir" || {
-                echo "Error: Couldn't link $src to $dst, creating $dst_dir failed with error code $?"
+                echo "Error: Couldn't link $src to $dst, creating $dst_dir failed with error code $?."
                 exit 1
             }
         fi
