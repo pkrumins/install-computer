@@ -299,6 +299,7 @@ main () {
     # Link configurations from ~/projects/dotfiles
     #
     local -A configs=(
+        ["bin"]=~/bin
         [".bashrc"]=~/.bashrc
         [".inputrc"]=~/.inputrc
         [".screenrc"]=~/.screenrc
