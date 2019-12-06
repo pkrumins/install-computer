@@ -347,6 +347,10 @@ main () {
     }
 
     echo "Your $COMPUTER_TYPE computer has been installed."
+    echo
+    echo "Manual tasks:"
+    echo "Copy ssh keys to ~/.ssh"
+    echo "Copy keepass database to ~/keepass"
 }
 
 main "$@"
