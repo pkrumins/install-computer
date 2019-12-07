@@ -303,6 +303,7 @@ main () {
         [".bashrc"]=~/.bashrc
         [".inputrc"]=~/.inputrc
         [".screenrc"]=~/.screenrc
+        [".tmux.conf"]=~/.tmux.conf
         [".vimrc"]=~/.vimrc
         [".config/i3"]=~/.config/i3
         [".urxvt"]=~/.urxvt
