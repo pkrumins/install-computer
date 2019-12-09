@@ -242,6 +242,8 @@ main () {
         whois
     );
     local -r extra_packages=(
+        zip
+        ncdu
         apt-file
         lm-sensors
     );
@@ -350,8 +352,9 @@ main () {
     echo "Your $COMPUTER_TYPE computer has been installed."
     echo
     echo "Manual tasks:"
-    echo "Copy ssh keys to ~/.ssh"
-    echo "Copy keepass database to ~/keepass"
+    echo "1) Copy ssh keys to ~/.ssh"
+    echo "2) Copy keepass database to ~/keepass"
+    echo "3) Run prepare-chrome-data-dir command and setup chrome template"
 }
 
 main "$@"
