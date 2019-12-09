@@ -222,6 +222,7 @@ main () {
         xinput
         arandr
         ttf-dejavu
+        wmctrl
     );
     local -r dev_packages=(
         gcc
