@@ -245,6 +245,7 @@ main () {
     local -r extra_packages=(
         zip
         ncdu
+        most
         apt-file
         lm-sensors
     );
@@ -308,6 +309,7 @@ main () {
         [".screenrc"]=~/.screenrc
         [".tmux.conf"]=~/.tmux.conf
         [".vimrc"]=~/.vimrc
+        [".mostrc"]=~/.mostrc
         [".config/i3"]=~/.config/i3
         [".urxvt"]=~/.urxvt
         [".xsessionrc"]=~/.xsessionrc
