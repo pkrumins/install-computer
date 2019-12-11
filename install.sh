@@ -309,6 +309,7 @@ main () {
         [".inputrc"]=~/.inputrc
         [".screenrc"]=~/.screenrc
         [".tmux.conf"]=~/.tmux.conf
+        [".vim"]=~/.vim
         [".vimrc"]=~/.vimrc
         [".mostrc"]=~/.mostrc
         [".config/i3"]=~/.config/i3
