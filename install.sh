@@ -229,6 +229,7 @@ main () {
         g++
         make
         python-pip
+        exuberant-ctags
     );
     local -r docker_packages=(
         docker.io
