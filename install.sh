@@ -247,6 +247,7 @@ main () {
         zip
         ncdu
         most
+        wamerican
         apt-file
         lm-sensors
     );
