@@ -248,6 +248,7 @@ main () {
         ncdu
         most
         wamerican
+        nfs-common
         apt-file
         lm-sensors
     );
