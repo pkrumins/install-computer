@@ -223,6 +223,7 @@ main () {
         arandr
         ttf-dejavu
         wmctrl
+        xdotool
     );
     local -r dev_packages=(
         gcc
