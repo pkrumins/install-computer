@@ -150,7 +150,7 @@ install_pip_packages () {
 
     local -r packages=("$@")
 
-    pip install "${packages[@]}" || {
+    pip3 install "${packages[@]}" || {
         echo "Error: Installing pip packages failed with error code $?."
         exit 1
     }
