@@ -97,7 +97,7 @@ build_docker_images () {
                 echo "Error: Couldn't change directory to $docker_dir, cd failed with error code $?."
                 exit 1
             };
-            docker build -t "$image_name" - < Dockerfile || {
+            docker build -t "$image_name" . || {
                 echo "Error: Building docker image $image_name failed with error code $?."
                 exit 1
             };
