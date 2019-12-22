@@ -471,8 +471,6 @@ main () {
     #
     install_systemd_service "$SCRIPT_DIR/rc-local.service"
 
-    # TODO: autorun powertop on a laptop
-
     # Set timezone to UTC
     #
     sudo timedatectl set-timezone UTC || {

@@ -17,3 +17,7 @@ iptables -A INPUT -i $IFACE -j REJECT
 ip6tables -A INPUT -i $IFACE -j ACCEPT -m state --state ESTABLISHED
 ip6tables -A INPUT -i $IFACE -j REJECT
 
+if [[ -f /.computer-laptop ]]; then
+    powertop --auto-tune
+fi
+
