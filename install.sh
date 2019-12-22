@@ -229,7 +229,7 @@ main () {
         echo "Error: Incorrect computer type, should be either a desktop or a laptop."
         exit 1
     fi
-    
+
     check_required_dir ~/projects/dotfiles
     check_required_dir ~/projects/dockerfiles
 
@@ -384,10 +384,10 @@ main () {
         sed -i 's/^!Xft.dpi:/Xft.dpi:/' ~/.Xresources
     fi
 
-    # Create ~/.computer-$COMPUTER_TYPE file
+    # Create /.computer-$COMPUTER_TYPE file
     #
-    touch ~/.computer-$COMPUTER_TYPE || {
-        echo "Error: Unable to create ~/.computer-$COMPUTER_TYPE file, touch failed with error code $?."
+    sudo touch /.computer-$COMPUTER_TYPE || {
+        echo "Error: Unable to create /.computer-$COMPUTER_TYPE file, touch failed with error code $?."
         exit 1
     }
 
@@ -405,7 +405,7 @@ main () {
     echo
     echo "Manual tasks:"
     echo "1) Copy ssh keys to ~/.ssh"
-    echo "2) Copy keepass database to ~/keepass"
+    echo "2) Copy keepass database to ~/keepassxc"
     echo "3) Run prepare-chrome-data-dir command and setup chrome template"
 }
 
