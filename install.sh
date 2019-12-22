@@ -82,6 +82,42 @@ link_configs () {
     done
 }
 
+create_docker_networks () {
+    if (( $# < 2 )); then
+        echo "Usage: ${FUNCNAME[0]} <name1> [name2 ...] <network1> [network2 ...]"
+        exit 1
+    fi
+
+    if (( $# % 2 == 1 )); then
+        echo "Error: Couldn't create docker networks, names and networks are uneven."
+        exit 1
+    fi
+
+    local -r names_networks=("$@")
+    local -r total_networks=$((${#names_networks[@]} / 2));
+
+    for ((i = 0; i < total_networks; i++)); do
+        name_index="$i"
+        network_index="$((total_networks+i))"
+        name="${names_networks[$name_index]}"
+        network="${names_networks[$network_index]}"
+
+        # TODO: check name format
+
+        if [[ -z "$name" ]]; then
+            echo "Error: Couldn't create a docker network, name was empty."
+            exit 1;
+        fi
+
+        # TODO: check network format
+
+        docker network create --subnet "$network" "$name" || {
+            echo "Error: Couldn't create docker network $name ($network), docker failed with error code $?."
+            exit 1
+        }
+    done
+}
+
 build_docker_images () {
     if (( $# < 1 )); then
         echo "Usage: ${FUNCNAME[0]} <dir1> [dir2 ...]"
@@ -304,6 +340,13 @@ main () {
     ))
 
     build_docker_images "${docker_files[@]}"
+
+    # Create docker networks
+    local -Ar docker_networks=(
+        ["lamp"]="10.10.10.0/24"
+    );
+
+    create_docker_networks "${!docker_networks[@]}" "${docker_networks[@]}"
 
     # Link configurations from ~/projects/dotfiles
     #
