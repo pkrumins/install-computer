@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+
+if [[ -f /.computer-laptop ]]; then
+    IFACE=wlp2s0
+elif [[ -f /.computer-desktop ]]; then
+    IFACE=enp0s25
+fi
+
+if [[ -f /.computer-desktop ]]; then
+    iptables -A INPUT -p tcp --dport 22 --src 192.168.1.1 -j ACCEPT
+fi
+
+iptables -A INPUT -i $IFACE -j ACCEPT -m state --state ESTABLISHED
+iptables -A INPUT -i $IFACE -j REJECT
+
+ip6tables -A INPUT -i $IFACE -j ACCEPT -m state --state ESTABLISHED
+ip6tables -A INPUT -i $IFACE -j REJECT
+

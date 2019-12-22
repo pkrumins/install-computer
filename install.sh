@@ -141,6 +141,60 @@ build_docker_images () {
     done
 }
 
+install_rc_local () {
+    if (( $# < 1 )); then
+        echo "Usage: ${FUNCNAME[0]} <rc.local file>"
+        exit 1
+    fi
+
+    local -r rc_local_file="$1"
+
+    if [[ ! -f "$rc_local_file" ]]; then
+        echo "Error: Rc.local file $rc_local_file doesn't exist."
+        exit 1;
+    fi
+
+    sudo cp "$rc_local_file" /etc/rc.local || {
+        echo "Error: Couldn't copy rc.local to /etc, cp exited with error code $?."
+        exit 1
+    }
+
+    sudo chmod 0755 /etc/rc.local || {
+        echo "Error: Chmod 0755 /etc/rc.local failed with error code $?."
+        exit 1
+    }
+}
+
+install_systemd_service () {
+    if (( $# < 1 )); then
+        echo "Usage: ${FUNCNAME[0]} <service file>"
+        exit 1
+    fi
+
+    local -r service_file="$1"
+    local -r service_name="$(basename "$service_file")"
+
+    if [[ ! -f "$service_file" ]]; then
+        echo "Error: Systemd service file $service_file doesn't exist."
+        exit 1;
+    fi
+
+    sudo cp "$service_file" /etc/systemd/system || {
+        echo "Error: Copying $service_file to /etc/systemd/system failed with error code $?"
+        exit 1;
+    }
+
+    sudo systemctl enable "$service_name" || {
+        echo "Error: Couldn't enable systemd service $service_name, error code $?"
+        exit 1;
+    }
+
+    sudo systemctl start "$service_name" || {
+        echo "Error: Couldn't start systemd service $service_name, error code $?"
+        exit 1;
+    }
+}
+
 add_user_to_groups () {
     if (( $# < 2 )); then
         echo "Usage: ${FUNCNAME[0]} <user> <group1> [group2 ...]"
@@ -155,6 +209,20 @@ add_user_to_groups () {
         echo "Error: Couldn't add the user $user to groups $csv_groups, usermod exited with error code $?."
         exit 1
     }
+}
+
+check_required_file () {
+    if (( $# < 1 )); then
+        echo "Usage: ${FUNCNAME[0]} <file>"
+        exit 1
+    fi
+
+    local -r file="$1"
+
+    if [[ ! -f "$file" ]]; then
+        echo "Error: File $file doesn't exist, check the install scripts."
+        exit 1;
+    fi
 }
 
 check_required_dir () {
@@ -230,8 +298,12 @@ main () {
         exit 1
     fi
 
+    local -r SCRIPT_DIR="$(dirname "$(realpath $0)")"
+
     check_required_dir ~/projects/dotfiles
     check_required_dir ~/projects/dockerfiles
+    check_required_file "$SCRIPT_DIR/rc.local"
+    check_required_file "$SCRIPT_DIR/rc-local.service"
 
     sudo apt-get update || {
         echo "Error: apt-get update failed with error code $?."
@@ -386,12 +458,19 @@ main () {
 
     # Create /.computer-$COMPUTER_TYPE file
     #
-    sudo touch /.computer-$COMPUTER_TYPE || {
+    sudo touch "/.computer-$COMPUTER_TYPE" || {
         echo "Error: Unable to create /.computer-$COMPUTER_TYPE file, touch failed with error code $?."
         exit 1
     }
 
-    # TODO: setup rc.local and iptables rules
+    # Install /etc/rc.local script
+    #
+    install_rc_local "$SCRIPT_DIR/rc.local"
+
+    # Create rc-local systemd service
+    #
+    install_systemd_service "$SCRIPT_DIR/rc-local.service"
+
     # TODO: autorun powertop on a laptop
 
     # Set timezone to UTC
