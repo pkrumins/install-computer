@@ -387,7 +387,6 @@ main () {
     );
     local -r pip_packages=(
         ranger-fm
-        youtube-dl
     );
 
     install_apt_packages "${x_packages[@]}"
