@@ -1,0 +1,40 @@
+# <install hosts>
+
+10.10.10.10 local.browserling.com
+10.10.10.10 local.comic.browserling.com
+10.10.10.10 local.catonmat.net
+
+10.10.10.10 local.onlinecsvtools.com
+10.10.10.10 local.onlinetsvtools.com
+10.10.10.10 local.onlinejsontools.com
+10.10.10.10 local.onlinexmltools.com
+10.10.10.10 local.onlineyamltools.com
+10.10.10.10 local.onlinestringtools.com
+10.10.10.10 local.onlinerandomtools.com
+10.10.10.10 local.onlinebinarytools.com
+10.10.10.10 local.onlinepngtools.com
+10.10.10.10 local.onlinehextools.com
+10.10.10.10 local.onlinejpgtools.com
+10.10.10.10 local.onlineasciitools.com
+10.10.10.10 local.onlinemathtools.com
+10.10.10.10 local.onlineimagetools.com
+10.10.10.10 local.onlineutf8tools.com
+10.10.10.10 local.onlinetexttools.com
+10.10.10.10 local.onlinenumbertools.com
+10.10.10.10 local.onlinefractaltools.com
+10.10.10.10 local.onlineunicodetools.com
+10.10.10.10 local.onlinehashtools.com
+10.10.10.10 local.onlinecryptotools.com
+10.10.10.10 local.onlinefiletools.com
+10.10.10.10 local.onlinebitmaptools.com
+10.10.10.10 local.onlinegiftools.com
+10.10.10.10 local.onlinelinuxtools.com
+
+10.10.10.10 local.techurls.com
+10.10.10.10 local.devurls.com
+10.10.10.10 local.sciurls.com
+10.10.10.10 local.finurls.com
+10.10.10.10 local.mathurls.com
+
+# </install hosts>
+

@@ -141,6 +141,24 @@ build_docker_images () {
     done
 }
 
+install_hosts () {
+    if (( $# < 1 )); then
+        echo "Usage: ${FUNCNAME[0]} <hosts file>"
+        exit 1
+    fi
+
+    local -r hosts_file="$1"
+
+    if [[ ! -f "$hosts_file" ]]; then
+        echo "Error: Hosts file $hosts_file doesn't exist."
+        exit 1;
+    fi
+
+    if ! grep -q "# <install hosts>" /etc/hosts; then
+        sudo bash -c "cat - >> /etc/hosts" <"$hosts_file"
+    fi
+}
+
 install_rc_local () {
     if (( $# < 1 )); then
         echo "Usage: ${FUNCNAME[0]} <rc.local file>"
@@ -304,6 +322,7 @@ main () {
     check_required_dir ~/projects/dockerfiles
     check_required_file "$SCRIPT_DIR/rc.local"
     check_required_file "$SCRIPT_DIR/rc-local.service"
+    check_required_file "$SCRIPT_DIR/hosts"
 
     sudo apt-get update || {
         echo "Error: apt-get update failed with error code $?."
@@ -470,6 +489,10 @@ main () {
     # Create rc-local systemd service
     #
     install_systemd_service "$SCRIPT_DIR/rc-local.service"
+
+    # Install /etc/hosts
+    #
+    install_hosts "$SCRIPT_DIR/hosts"
 
     # Set timezone to UTC
     #
