@@ -316,6 +316,13 @@ main () {
         exit 1
     fi
 
+    # Create /.computer-$COMPUTER_TYPE file
+    #
+    sudo touch "/.computer-$COMPUTER_TYPE" || {
+        echo "Error: Unable to create /.computer-$COMPUTER_TYPE file, touch failed with error code $?."
+        exit 1
+    }
+
     local -r SCRIPT_DIR="$(dirname "$(realpath $0)")"
 
     check_required_dir ~/projects/dotfiles
@@ -474,13 +481,6 @@ main () {
         # Enable high DPI on a laptop
         sed -i 's/^!Xft.dpi:/Xft.dpi:/' ~/.Xresources
     fi
-
-    # Create /.computer-$COMPUTER_TYPE file
-    #
-    sudo touch "/.computer-$COMPUTER_TYPE" || {
-        echo "Error: Unable to create /.computer-$COMPUTER_TYPE file, touch failed with error code $?."
-        exit 1
-    }
 
     # Install /etc/rc.local script
     #
