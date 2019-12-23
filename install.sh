@@ -414,6 +414,7 @@ main () {
     #
     local -r extra_groups=(
         audio
+        video
         docker
     );
 
