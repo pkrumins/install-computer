@@ -383,6 +383,7 @@ main () {
         zip
         ncdu
         most
+        tree
         wamerican
         nfs-common
         apt-file
