@@ -363,6 +363,7 @@ main () {
         gcc
         g++
         make
+        pkg-config
         python-pip
         python3-pip
         exuberant-ctags
