@@ -385,6 +385,7 @@ main () {
         ncdu
         most
         tree
+        pv
         wamerican
         nfs-common
         apt-file
