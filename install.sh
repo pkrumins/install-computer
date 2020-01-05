@@ -24,7 +24,7 @@ join_strings () {
         echo "Usage: ${FUNCNAME[0]} <separator> <string1> [string2 ...]"
         exit 1
     fi
-    
+
     local -r separator="$1" && shift
     local -r strings=("$@")
     local -r IFS="$separator"
@@ -462,6 +462,8 @@ main () {
         [".mostrc"]=~/.mostrc
         [".config/i3"]=~/.config/i3
         [".urxvt"]=~/.urxvt
+        [".fonts"]=~/.fonts
+        [".fonts.conf"]=~/.fonts.conf
         [".xsessionrc"]=~/.xsessionrc
         [".Xresources"]=~/.Xresources
     );
