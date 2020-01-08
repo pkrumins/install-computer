@@ -383,6 +383,7 @@ main () {
         net-tools
         netcat
         whois
+        ipcalc
     );
     local -r extra_packages=(
         zip
