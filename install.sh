@@ -395,6 +395,7 @@ main () {
         apt-file
         lm-sensors
         msort
+        libimage-exiftool-perl
     );
     local -r laptop_packages=(
         powertop
