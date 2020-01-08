@@ -368,6 +368,9 @@ main () {
         python-pip
         python3-pip
         exuberant-ctags
+        libpcre2-dev
+        libncurses5-dev
+        libncursesw5-dev
     );
     local -r docker_packages=(
         docker.io
