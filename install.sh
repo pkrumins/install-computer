@@ -394,6 +394,7 @@ main () {
         nfs-common
         apt-file
         lm-sensors
+        msort
     );
     local -r laptop_packages=(
         powertop
