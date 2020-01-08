@@ -363,6 +363,7 @@ main () {
         gcc
         g++
         make
+        autoconf
         pkg-config
         python-pip
         python3-pip
