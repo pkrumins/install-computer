@@ -396,6 +396,7 @@ main () {
         lm-sensors
         msort
         libimage-exiftool-perl
+        moreutils
     );
     local -r laptop_packages=(
         powertop
