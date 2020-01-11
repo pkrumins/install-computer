@@ -391,6 +391,7 @@ main () {
         most
         tree
         pv
+        bvi
         wamerican
         nfs-common
         apt-file
