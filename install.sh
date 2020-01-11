@@ -392,6 +392,7 @@ main () {
         tree
         pv
         bvi
+        fdupes
         wamerican
         nfs-common
         apt-file
