@@ -393,6 +393,7 @@ main () {
         pv
         bvi
         fdupes
+        rlwrap
         wamerican
         nfs-common
         apt-file
