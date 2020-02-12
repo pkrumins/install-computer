@@ -401,6 +401,7 @@ main () {
         msort
         libimage-exiftool-perl
         moreutils
+        ascii
     );
     local -r laptop_packages=(
         powertop
