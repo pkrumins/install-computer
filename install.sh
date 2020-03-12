@@ -402,6 +402,7 @@ main () {
         libimage-exiftool-perl
         moreutils
         ascii
+        w3m-img
     );
     local -r laptop_packages=(
         powertop
