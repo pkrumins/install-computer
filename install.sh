@@ -360,6 +360,7 @@ main () {
         xdotool
     );
     local -r dev_packages=(
+        vim-gtk
         gcc
         g++
         make
