@@ -197,7 +197,7 @@ install_systemd_service () {
         exit 1;
     fi
 
-    sudo cp "$service_file" "/etc/systemd/system/$service_file" || {
+    sudo cp "$service_file" "/etc/systemd/system/" || {
         echo "Error: Copying $service_file to /etc/systemd/system failed with error code $?"
         exit 1;
     }
