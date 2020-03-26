@@ -475,6 +475,7 @@ main () {
         [".vimrc"]=~/.vimrc
         [".mostrc"]=~/.mostrc
         [".config/i3"]=~/.config/i3
+        [".config/ranger"]=~/.config/ranger
         [".urxvt"]=~/.urxvt
         [".fonts"]=~/.fonts
         [".fonts.conf"]=~/.fonts.conf
