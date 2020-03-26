@@ -68,11 +68,21 @@ link_configs () {
             exit 1;
         fi
 
-        if [[ ! -d "$dst_dir" ]]; then
-            $sudo_cmd mkdir -p "$dst_dir" || {
-                echo "Error: Couldn't link $src to $dst, creating $dst_dir failed with error code $?."
-                exit 1
-            }
+        if [[ -d "$src" ]]; then
+            # when symlinking directories, make sure the destination directory doesn't exist
+            if [[ -d "$dst" ]]; then # if destination dir already exists, delete it
+                $sudo_cmd rm -rf "$dst" || {
+                    echo "Error: Couldn't link $src to $dst, deleting $dst failed with error code $?."
+                    exit 1
+                }
+            fi
+            if [[ ! -d "$dst_dir" ]]; then
+                # if the directory that will contain the symlinked directory doesn't exist, create it
+                $sudo_cmd mkdir -p "$dst_dir" || {
+                    echo "Error: Couldn't link $src to $dst, creating $dst_dir failed with error code $?."
+                    exit 1
+                }
+            fi
         fi
 
         $sudo_cmd ln -fs "$src" "$dst" || {
