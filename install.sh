@@ -69,15 +69,19 @@ link_configs () {
         fi
 
         if [[ -d "$src" ]]; then
-            # when symlinking directories, make sure the destination directory doesn't exist
-            if [[ -d "$dst" ]]; then # if destination dir already exists, delete it
+            # When symlinking directories, make sure the destination directory doesn't exist.
+            # If the destination directory exists, then the `ln` command will create the
+            # symlink inside of the destination directory, rather than replacing it, even
+            # if the `-f` argument is used.
+            if [[ -d "$dst" ]]; then
+                # If the destination dir already exists, delete it.
                 $sudo_cmd rm -rf "$dst" || {
                     echo "Error: Couldn't link $src to $dst, deleting $dst failed with error code $?."
                     exit 1
                 }
             fi
             if [[ ! -d "$dst_dir" ]]; then
-                # if the directory that will contain the symlinked directory doesn't exist, create it
+                # If the directory that will contain the symlinked directory doesn't exist, create it.
                 $sudo_cmd mkdir -p "$dst_dir" || {
                     echo "Error: Couldn't link $src to $dst, creating $dst_dir failed with error code $?."
                     exit 1
