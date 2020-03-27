@@ -125,10 +125,13 @@ create_docker_networks () {
 
         # TODO: check network format
 
-        docker network create --subnet "$network" "$name" || {
-            echo "Error: Couldn't create docker network $name ($network), docker failed with error code $?."
-            exit 1
-        }
+        # Create a network only if it doesn't exist
+        if ! docker network inspect "$name" 1>/dev/null 2>&1; then
+            docker network create --subnet "$network" "$name" || {
+                echo "Error: Couldn't create docker network $name ($network), docker failed with error code $?."
+                exit 1
+            }
+        fi
     done
 }
 
