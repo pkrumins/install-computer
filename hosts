@@ -54,6 +54,10 @@
 10.10.10.10 local.giftools.browserling.com
 10.10.10.10 local.onlinelinuxtools.com
 10.10.10.10 local.linuxtools.browserling.com
+10.10.10.10 local.onlineintegertools.com
+10.10.10.10 local.integertools.browserling.com
+10.10.10.10 local.onlinetimetools.com
+10.10.10.10 local.timetools.browserling.com
 
 10.10.10.10 local.techurls.com
 10.10.10.10 local.devurls.com
@@ -61,6 +65,8 @@
 10.10.10.10 local.finurls.com
 10.10.10.10 local.mathurls.com
 10.10.10.10 local.linuxurls.com
+10.10.10.10 local.tuxurls.com
+10.10.10.10 local.physurls.com
 
 # </install hosts>
 
